@@ -1,41 +1,46 @@
+//wesleydiasmaciel@gmail.com
 package Pratica3;
-
 import java.util.Scanner;
 
 public class Automato {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a palavra: ");
+        System.out.print("Escreva a palavra que deseja verificar: ");
         String palavra = scanner.nextLine();
         scanner.close();
 
-        if (verificaPalavra(palavra)) {
-            System.out.println("Palavra aceita!");
+        if (checaPalavra(palavra)) {
+            System.out.println("Palavra aceita");
         } else {
-            System.out.println("Palavra não aceita!");
+            System.out.println("Palavra não aceita");
         }
     }
 
-    public static boolean verificaPalavra(String palavra) {
-        String estado = "q0"; // Estado inicial
+    public static boolean checaPalavra(String palavra) {
+        // Estado inicial
+        String estado = "q0"; 
 
         for (char simbolo : palavra.toCharArray()) {
             switch (estado) {
+
                 case "q0":
-                    if (simbolo == 'b') estado = "q0";
-                    else if (simbolo == 'a') estado = "s3";
+                    if (simbolo == 'a') estado = "s3";
+                    else if (simbolo == 'b') estado = "q0";
                     else return false;
                     break;
+
                 case "s3":
-                    if (simbolo == 'b') estado = "q0";
-                    else if (simbolo == 'a') estado = "s6";
+                    if (simbolo == 'a') estado = "s6";
+                    else if (simbolo == 'b') estado = "q0";
                     else return false;
                     break;
+
                 case "s4":
-                    if (simbolo == 'b') estado = "s4";
-                    else if (simbolo == 'a') estado = "s6";
+                    if (simbolo == 'a') estado = "s6";
+                    else if (simbolo == 'b') estado = "s4";
                     else return false;
                     break;
+
                 case "s6":
                     if (simbolo == 'a') estado = "s6";
                     else if (simbolo == 'b') estado = "s4";
@@ -43,6 +48,7 @@ public class Automato {
                     break;
             }
         }
-        return estado.equals("s4") || estado.equals("s6"); // Estados finais
+        // Estados finais
+        return estado.equals("s4") || estado.equals("s6"); 
     }
 }
